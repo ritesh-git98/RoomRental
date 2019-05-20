@@ -1,3 +1,7 @@
+<?php session_start();
+$_SESSION['home']="";
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,115 +11,148 @@
   <title>RoomRental</title>
 </head>
 <body>
-<div class="jumbotron text-center">
-     <h1>ROOM RENTAL</h1>
-    <p>Accomodation Solution</p>
-    </div>
-    <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-        <span class="icon-bar"></span> 
-      </button>
-      <a class="navbar-brand">RoomRental</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li ><a href="home.php">Home</a></li>
-        <li><a href="login.php">Login</a></li>
-        <li><a href="register.php">Register</a></li>
-           <li class="active"><a href="post.php">Post Your Room</a></li>
-      </ul>
-      </div></div></nav>    
+<?php  
+    $id=$_GET['id'];
+    if(empty($_SESSION['name'])){
+    include 'navbar.php';
+    }
+    else{
+        include 'navbar_log.php';
+    }
+    
+    ?>  
  <div class="container">
-   
-  <form class="form-horizontal" action="addData.php" method="post">
-    <hr>
+  <form class="form-horizontal" action="addAdv.php?id=<?php echo $id ?>" method="post">
+    <h1>Post Your Add</h1>
+      <font color='red'>* required fields</font><br>
+      <hr>
+       <div class="form-group">
+      <label class="control-label col-sm-2" for="title">Ad Title* :</label>
+      <div class="col-sm-6">          
+        <input type="text" class="form-control" id="title" placeholder="Title for ad (max 15 characters)" name="title" required>
+      </div>
+    </div>
       <div class="form-group">
-      <label class="control-label col-sm-2" for="type">Type:</label>
+      <label class="control-label col-sm-2" for="locality">Locality* :</label>
+      <div class="col-sm-6">          
+        <input type="text" class="form-control" id="locality" placeholder="locality" name="locality" required>
+      </div>
+    </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2" for="type">Type* :</label>
       <div class="col-sm-6">
-       <label class="radio-inline"><input type="radio" name="optradio" checked>Option 1</label>
-<label class="radio-inline"><input type="radio" name="optradio">Option 2</label>
-<label class="radio-inline"><input type="radio" name="optradio">Option 3</label>
+       <label class="radio-inline"><input type="radio" name="type"  value="Appartment/Flats">Appartment/Flats</label>
+<label class="radio-inline"><input type="radio" name="type" value="Independent House/Villa">Independent House/Villa</label>
+<label class="radio-inline"><input type="radio" name="type" value="PG">PG</label>
    </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Bedrooms:</label>
+      <label class="control-label col-sm-2" for="bedrooms">Bedrooms* :</label>
       <div class="col-sm-6">  
-  <select class="form-control" id="sel1" >
-    <option selected disabled>bedrooms</option>
-      <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-      <option>4+</option>
+  <select class="form-control" name="bedrooms" id="bedrooms" required >
+    <option selected disabled value="">bedrooms</option>
+      <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="3+">3+</option>
   </select>
       </div>
     </div>
        <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Bedrooms:</label>
+      <label class="control-label col-sm-2" for="bathrooms">Bathrooms* :</label>
       <div class="col-sm-6">  
-  <select class="form-control" id="sel1" >
-    <option selected disabled>Bathrooms:</option>
-      <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-      <option>4+</option>
+  <select class="form-control" id="bathrooms" name="bathrooms"  required>
+    <option selected disabled value="">Bathrooms</option>
+      <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="3+">3+</option>
   </select>
       </div>
     </div>
       <div class="form-group">
-      <label class="control-label col-sm-2" for="type">Furnishing:</label>
+      <label class="control-label col-sm-2" for="furnishing">Furnishing* :</label>
       <div class="col-sm-6">
-       <label class="radio-inline"><input type="radio" name="optradio3" checked>Option 1</label>
-<label class="radio-inline"><input type="radio" name="optradio3">Option 2</label>
-<label class="radio-inline"><input type="radio" name="optradio3">Option 3</label>
+       <label class="radio-inline"><input type="radio" name="furnishing" value="Fully-Furnished" >Fully Furnished</label>
+<label class="radio-inline"><input type="radio" name="furnishing" value="Semi-Furnished">Semi-Furnished</label>
+<label class="radio-inline"><input type="radio" name="furnishing" value="Un-furnished">Un-furnished</label>
    </div>
     </div>
       <div class="form-group">
-      <label class="control-label col-sm-2" for="type">Listed by:</label>
+      <label class="control-label col-sm-2" for="listed">Listed by*  :</label>
       <div class="col-sm-6">
-       <label class="radio-inline"><input type="radio" name="optradio2" checked>Option 1</label>
-<label class="radio-inline"><input type="radio" name="optradio2">Option 2</label>
-<label class="radio-inline"><input type="radio" name="optradio2">Option 3</label>
+       <label class="radio-inline"><input type="radio" name="listed" value="owner">Owner</label>
+<label class="radio-inline"><input type="radio" name="listed" value="dealer">Dealer</label>
    </div>
     </div>
       <div class="form-group">
-      <label class="control-label col-sm-2" for="type">Bachelors allowed:</label>
+      <label class="control-label col-sm-2" for="bachelors" >Bachelors allowed* :</label>
       <div class="col-sm-6">
-       <label class="radio-inline"><input type="radio" name="optradio1" checked>Option 1</label>
-<label class="radio-inline"><input type="radio" name="optradio1">Option 2</label>
-<label class="radio-inline"><input type="radio" name="optradio1">Option 3</label>
+<label class="radio-inline"><input type="radio" name="bachelors"  value="yes">Yes</label>
+<label class="radio-inline"><input type="radio" name="bachelors" value="no">No</label>
    </div>
     </div>
       
       <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Maintanence:</label>
+      <label class="control-label col-sm-2" for="maintenence">Maintenance* :</label>
       <div class="col-sm-6">          
-        <input type="text" class="form-control" id="pwd" placeholder="Repeat password" name="repwd">
+        <input type="text" class="form-control" id="maintenence" required placeholder="Monthly Maintanence" name="maintenence">
+      </div>
+    </div>
+        
+          <div class="form-group">
+      <label class="control-label col-sm-2" for="images">Images* (upto 10):</label>
+      <div class="col-sm-6">          
+        <input type="file" multiple class="form-control" id="images" name="images">
+      </div>
+    </div>
+          <div class="form-group">
+      <label class="control-label col-sm-2" for="area">Area* :</label>
+      <div class="col-sm-6">          
+        <input type="text" class="form-control" id="area" placeholder="area in ft2" required name="area">
+      </div>
+    </div>
+          <div class="form-group">
+      <label class="control-label col-sm-2" for="floor">Floor* :</label>
+      <div class="col-sm-6">          
+        <input type="text" class="form-control" id="floor" required placeholder="Floor no" name="floor">
+      </div>
+    </div>
+          <div class="form-group">
+      <label class="control-label col-sm-2" for="parking">Car Parking * :</label>
+       <div class="col-sm-6">
+<label class="radio-inline"><input type="radio" name="parking" value="yes">yes</label>
+<label class="radio-inline"><input type="radio" name="parking" value="no">No</label>
+   </div>
+    </div>
+    
+          <div class="form-group">
+              <label class="control-label col-sm-2" for="price">Price* :</label>
+      <div class="col-sm-6">   
+        <input type="number" class="form-control" id="price" placeholder="Price" required name="price">
+      </div>
+    </div>
+          <div class="form-group">
+      <label class="control-label col-sm-2" for="contact">Contact Number* :</label>
+      <div class="col-sm-6">          
+        <input type="tel" class="form-control" id="contact" placeholder="mobile number" name="contact" required>
       </div>
     </div>
       <div class="form-group">
-      <label class="control-label col-sm-2" for="ima">ima:</label>
-      <div class="col-sm-6">          
-        <input type="file" class="form-control" id="ima" placeholder="Repeat password" name="repwd">
-      </div>
-    </div>
+  <label class="control-label col-sm-2" for="description">Desciption* :</label>
+ <div class="col-sm-6">          
+        <textarea class="form-control" rows="6" id="description" required name="description"></textarea>
+      </div> 
+</div>
     <div class="form-group">        
-      <div class="col-sm-offset-1 col-sm-8">
-        <button type="submit" class="btn btn-success">Register</button>
+      <div class="col-sm-offset-2 col-sm-8">
+        <button type="submit" class="btn btn-success" name="post">Post</button>
       </div>
     </div>
   </form>
 </div>
-  
-        <div class="jumbotron text-center" style="background-color:black">
-  <p>Follow Us</p>
-        <p><i class="fa fa-facebook-official" ></i>  <i class="fa fa-instagram"></i>  <i class="fa fa-twitter"></i></p>
-</div>
-</body>
+  <?php
+        include 'footer.php';
+        ?>
+    </body>
 </html>

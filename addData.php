@@ -1,3 +1,6 @@
+<?php session_start();
+$_SESSION['reg_error']="";
+ ?>
 <html>
     <head>
         <title>
@@ -15,28 +18,22 @@
             return $data;
         }
 
-        if(isset($_POST['submit'])){//Check if form has been submitted
+        if(isset($_POST['register'])){//Check if form has been submitted
             $name = testInput($_POST['name']);
-            $age = testInput($_POST['age']);
             $email = testInput($_POST['email']);
+            $password = testInput($_POST['password']);
         }
 
-        //Checking Empty Fields
-
-        if(empty($name) || empty($age) || empty($email)){//Check if some fields are required
-            echo "<font color='red'> No field should be left empty....</font><br>";
-        }
-        else{
-            $sql = "INSERT INTO users (username, age, email) VALUES ('$name','$age','$email')";
+       
+            $sql = "INSERT INTO `users` (name, email, password) VALUES ('$name','$email','$password')";
 
             if( $mysqli->query($sql) == TRUE){
-                echo 'New Record Has Been Added Successfully...';
-                echo "<br><a href='index.php'>View Records</a>";
+                header("location:login.php") ;
             }
             else{
-                echo 'Error: '. $sql . "<br>" . $mysqli->error;
+                 $_SESSION['reg_error']=1;
+           header("location:register.php") ;
             }
-        }
 
         ?>
     </body>
