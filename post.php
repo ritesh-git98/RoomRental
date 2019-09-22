@@ -22,7 +22,7 @@ $_SESSION['home']="";
     
     ?>  
  <div class="container">
-  <form class="form-horizontal" action="addAdv.php?id=<?php echo $id ?>" method="post">
+  <form class="form-horizontal" action="addAdv.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
     <h1>Post Your Add</h1>
       <font color='red'>* required fields</font><br>
       <hr>
@@ -103,7 +103,7 @@ $_SESSION['home']="";
           <div class="form-group">
       <label class="control-label col-sm-2" for="images">Images* (upto 10):</label>
       <div class="col-sm-6">          
-        <input type="file" multiple class="form-control" id="images" name="images">
+        <input type="file" multiple class="form-control" name="images[]">
       </div>
     </div>
           <div class="form-group">
@@ -135,7 +135,7 @@ $_SESSION['home']="";
           <div class="form-group">
       <label class="control-label col-sm-2" for="contact">Contact Number* :</label>
       <div class="col-sm-6">          
-        <input type="tel" class="form-control" id="contact" placeholder="mobile number" name="contact" required>
+        <input type="text" class="form-control" maxlength="10" id="contact" placeholder="mobile number" name="contact" required>
       </div>
     </div>
       <div class="form-group">
